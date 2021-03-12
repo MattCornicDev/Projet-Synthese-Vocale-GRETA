@@ -1,0 +1,5 @@
+C:\Users\mattc\source\repos\SyntheseVocale\SyntheseVocale\obj\Debug\SyntheseVocale.csprojAssemblyReference.cache
+C:\Users\mattc\source\repos\SyntheseVocale\SyntheseVocale\obj\Debug\SyntheseVocale.Form1.resources
+C:\Users\mattc\source\repos\SyntheseVocale\SyntheseVocale\obj\Debug\SyntheseVocale.Properties.Resources.resources
+C:\Users\mattc\source\repos\SyntheseVocale\SyntheseVocale\obj\Debug\SyntheseVocale.csproj.GenerateResource.cache
+C:\Users\mattc\source\repos\SyntheseVocale\SyntheseVocale\obj\Debug\SyntheseVocale.csproj.CoreCompileInputs.cache
