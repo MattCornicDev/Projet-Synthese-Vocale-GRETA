@@ -21,8 +21,8 @@ namespace SyntheseVocale
         private Grammar motsAReconnaitre;
 
         private Bitmap imageAssociee;
-        private int moteurReconnaissance_SpeechRecognized;
-        private int moteurReconnaissance_SpeechRecognitionRejected;
+        
+        private Choices couleurChoisie;
 
         public Form1()
         {
@@ -34,8 +34,10 @@ namespace SyntheseVocale
             moteurReconnaissance.SetInputToDefaultAudioDevice();
             // On constuir le dictionnaire des mots à reconnaissance, ceux qui ne figurent pas dans cette liste ne seront pas reconnus
             formeChoisie = new Choices(new string[] { "carré", "cercle", "triangle" });
+            couleurChoisie = new Choices(new string[] { "rouge", "vert", "bleu", "jaune" });
             // On implante le dictionnaire dans le moteur de reconnaissance en utilisant un GrammarBuilder
             contraintesReconnaissance = new GrammarBuilder(formeChoisie);
+            contraintesReconnaissance.Append(new SemanticResultKey("couleur", couleurChoisie));
             motsAReconnaitre = new Grammar(contraintesReconnaissance);
             moteurReconnaissance.LoadGrammarAsync(motsAReconnaitre);
 
@@ -77,18 +79,33 @@ namespace SyntheseVocale
 
             switch (e.Result.Text)
             {
-                case "carré":
+                case "carré rouge":
                     fluxImage = new FileStream(@"..\images\carre.jpg", FileMode.Open);
                     pictureBoxAssociee.Image = Image.FromStream(fluxImage);
                     fluxImage.Close();
                     break;
-                case "cercle":
-                    fluxImage = new FileStream(@"..\images\cercles.jpg", FileMode.Open);
+                case "cercle rouge":
+                    fluxImage = new FileStream(@"..\images\cercle.jpg", FileMode.Open);
                     pictureBoxAssociee.Image = Image.FromStream(fluxImage);
                     fluxImage.Close();
                     break;
-                case "triangle":
-                    fluxImage = new FileStream(@"\..\images\triangles.jpg", FileMode.Open);
+                case "cercle bleu":
+                    fluxImage = new FileStream(@"..\images\cercle_bleu.jpg", FileMode.Open);
+                    pictureBoxAssociee.Image = Image.FromStream(fluxImage);
+                    fluxImage.Close();
+                    break;
+                case "cercle vert":
+                    fluxImage = new FileStream(@"..\images\cercle_vert.jpg", FileMode.Open);
+                    pictureBoxAssociee.Image = Image.FromStream(fluxImage);
+                    fluxImage.Close();
+                    break;
+                case "cercle jaune":
+                    fluxImage = new FileStream(@"..\images\cerclejaune.jpg", FileMode.Open);
+                    pictureBoxAssociee.Image = Image.FromStream(fluxImage);
+                    fluxImage.Close();
+                    break;
+                case "triangle rouge":
+                    fluxImage = new FileStream(@"..\images\triangles.jpg", FileMode.Open);
                     pictureBoxAssociee.Image = Image.FromStream(fluxImage);
                     fluxImage.Close();
                     break;
@@ -100,7 +117,7 @@ namespace SyntheseVocale
         private void buttonParler_Click(object sender, EventArgs e)
         {
             // on ne reconnait qu'un mot à la fois
-            moteurReconnaissance.RecognizeAsync(RecognizeMode.Single);
+            moteurReconnaissance.RecognizeAsync(RecognizeMode.Multiple);
         }
 
         private void buttonQuitter_Click(object sender, EventArgs e)
